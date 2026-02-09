@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Pavani ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            color: #fff;
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .page.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: #ff4b7d;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: reveal 1.5s forwards;
+        }
+
+        .delay1 {
+            animation-delay: 0.6s;
+        }
+
+        .delay2 {
+            animation-delay: 1.2s;
+        }
+
+        .delay3 {
+            animation-delay: 1.8s;
+        }
+
+        .delay4 {
+            animation-delay: 2.0s;
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slider */
+        .slider {
+            width: 100%;
+            max-width: 320px;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            display: block;
+            border-radius: 15px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .overlay {
+            opacity: 1;
+        }
+
+        .letters button {
+            margin: 5px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        #finalName {
+            display: none;
+            margin-top: 20px;
+            color: #ffb6c1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE 1 -->
+    <section class="page active landing" id="page1">
+        <h1 class="reveal delay1">Happy Birthday Pavani ❤️</h1>
+        <p class="reveal delay2">Distance never stopped me from choosing you.</p>
+        <p class="reveal delay3">This is not a gift… this is my love, written in code.</p>
+        <button class="reveal delay4" onclick="nextPage(2)">Start the Surprise</button>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section class="page" id="page2">
+        <div class="slider">
+            <div class="slides" id="slides">
+                <div class="slide">
+                    <img src="images/1st birth day.jpg">
+                    <div class="overlay">The smile that started everything 💖</div>
+                </div>
+                <div class="slide">
+                    <img src="images/after 2 months.jpg">
+                    <div class="overlay">Slowly, you became my peace 🌸</div>
+                </div>
+                <div class="slide">
+                    <img src="images/after 5 months.jpg">
+                    <div class="overlay">Every day, I fell harder for you ❤️</div>
+                </div>
+                <div class="slide">
+                    <img src="images/her 1st saree appeareance.jpg">
+                    <div class="overlay">Elegance has your name ✨</div>
+                </div>
+                <div class="slide">
+                    <img src="/birthday/images/after seeing her like this i just disseapeared for sometime.jpg" alt="">
+                    <div class="overlay">Harshness makes me cool and breakdown my stress..</div>
+                </div>
+                <div class="slide">
+                    <img src="/birthday/images/she wared the saree because of my request.jpg" alt="">
+                    <div class="overlay"> your presence make me happy live.</div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="nextPage(3)">One Last Thing ❤️</button>
+    </section>
+
+    <!-- PAGE 3 -->
+    <section class="page" id="page3">
+        <h2>Unlock My Favorite Name ❤️</h2>
+        <p>Tap the letters in correct order</p>
+
+        <div class="letters">
+            <button onclick="selectLetter('A')">A</button>
+            <button onclick="selectLetter('A')">U</button>
+            <button onclick="selectLetter('P')">P</button>
+            <button onclick="selectLetter('P')">L</button>
+            <button onclick="selectLetter('V')">V</button>
+            <button onclick="selectLetter('N')">N</button>
+            <button onclick="selectLetter('A')">A</button>
+            <button onclick="selectLetter('I')">I</button>
+            <button onclick="selectLetter('I')">1</button>
+        </div>
+
+        <p id="output"></p>
+        <h1 id="finalName">PAVANI ❤️</h1>
+    </section>
+
+    <script>
+        /* PAGE SWITCH */
+        function nextPage(num) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page' + num).classList.add('active');
+        }
+
+        /* SLIDER */
+        let currentIndex = 0;
+        const slides = document.getElementById('slides');
+
+        function updateSlide() {
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slides.children.length;
+            updateSlide();
+        }, 4000);
+
+        /* PUZZLE */
+        let answer = "";
+        const correct = "PAVANI";
+
+        function selectLetter(letter) {
+            answer += letter;
+            document.getElementById("output").innerText = answer;
+
+            if (!correct.startsWith(answer)) {
+                answer = "";
+                document.getElementById("output").innerText = "";
+            }
+
+            if (answer === correct) {
+                document.getElementById("finalName").style.display = "block";
+                setTimeout(() => {
+                    alert(
+                        "This page exists only for you 💖\n\n" +
+                        "But my feelings won’t disappear.\n" +
+                        "No matter where we are… I’m always here 🤍 \n\n" +
+                        "dont worry it will dissappear after 2min after seeing this msg \n\n" +
+                        "you complete meeeeee....."
+                    );
+                }, 600);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
